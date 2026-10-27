@@ -1,0 +1,6 @@
+{
+  "name": "BasHoadha — Dhivehi Word Puzzle",
+  "description": "Interactive Dhivehi (Thaana) RTL word search puzzle game featuring seeded daily challenges, offline campaign packs, progress analytics, and global leaderboards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
