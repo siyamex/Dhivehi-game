@@ -26,6 +26,7 @@ import {
   PlayerProgress,
 } from './types/game';
 import { soundEngine } from './utils/sound';
+import { shareGame, shareScore } from './utils/instantGames';
 import {
   createScoreSubmission,
   flushOfflineScoreQueue,
@@ -261,6 +262,7 @@ export default function App() {
           onSelectLevel={handleSelectCampaignLevel}
           onOpenLeaderboard={() => setActiveModal('LEADERBOARD')}
           onOpenStats={() => setActiveModal('STATS')}
+          onShareGame={() => void shareGame()}
           onUpdateProfile={handleUpdateProfile}
           onChangeTheme={handleChangeTheme}
         />
@@ -434,6 +436,14 @@ export default function App() {
               }}
             >
               <span>NEXT</span>
+            </GameKitPillButton>
+
+            <GameKitPillButton
+              variant="next"
+              className="col-span-2"
+              onClick={() => void shareScore(roundSummary.score, roundSummary.level.id)}
+            >
+              <span>SHARE SCORE</span>
             </GameKitPillButton>
 
             <GameKitPillButton

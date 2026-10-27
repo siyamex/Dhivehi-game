@@ -4,12 +4,18 @@ import path from 'path';
 import {defineConfig} from 'vite';
 import {VitePWA} from 'vite-plugin-pwa';
 
-export default defineConfig(() => {
+export default defineConfig(({ mode }) => {
+  const instantGamesBuild = mode === 'instant';
+
   return {
+    base: instantGamesBuild ? './' : '/',
+    define: {
+      __INSTANT_GAMES__: JSON.stringify(instantGamesBuild),
+    },
     plugins: [
       react(),
       tailwindcss(),
-      VitePWA({
+      ...(!instantGamesBuild ? [VitePWA({
         registerType: 'autoUpdate',
         includeAssets: ['icon.svg', 'apple-touch-icon.png', 'pwa-192x192.png', 'pwa-512x512.png', 'pwa-maskable-512x512.png'],
         manifest: {
@@ -96,8 +102,9 @@ export default defineConfig(() => {
           enabled: true,
           type: 'module',
         },
-      }),
+      })] : []),
     ],
+    ...(instantGamesBuild ? { build: { outDir: 'dist-instant' } } : {}),
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),

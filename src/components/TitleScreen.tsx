@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Share2 } from 'lucide-react';
 import { MALDIVIAN_ATOLLS, OFFLINE_CAMPAIGN_PACKS } from '../data/lexicon';
 import { BoardTheme, LevelConfig, PlayerProgress } from '../types/game';
 import { COMMON_THAANA_SYLLABLES } from '../utils/thaana';
@@ -15,6 +16,7 @@ interface TitleScreenProps {
   onSelectLevel: (level: LevelConfig) => void;
   onOpenLeaderboard: () => void;
   onOpenStats: () => void;
+  onShareGame: () => void;
   onUpdateProfile: (nameEn: string, nameDv: string, atollTag: string) => void;
   onChangeTheme: (theme: BoardTheme) => void;
 }
@@ -37,6 +39,7 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
   onSelectLevel,
   onOpenLeaderboard,
   onOpenStats,
+  onShareGame,
   onUpdateProfile,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -210,6 +213,15 @@ export const TitleScreen: React.FC<TitleScreenProps> = ({
         </span>
 
         <div dir="ltr" className="flex items-center gap-2.5">
+          <button
+            type="button"
+            aria-label="Share game"
+            title="Share game"
+            onClick={onShareGame}
+            className="w-11 h-11 flex items-center justify-center rounded-full bg-white/15 hover:bg-white/25 border border-white/30 text-white cursor-pointer"
+          >
+            <Share2 size={20} aria-hidden="true" />
+          </button>
           <GameKitOrbButton
             variant="orange"
             icon="trophy"
